@@ -1,5 +1,7 @@
 name: Scrape Players
-on: [push]
+on:
+  schedule:
+    - cron: 0 5 * * 1
 jobs:
   scrape-players:
     runs-on: ubuntu-latest
