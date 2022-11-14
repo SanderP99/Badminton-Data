@@ -14,8 +14,7 @@ class Tournament:
     type: str
     link: str
 
-    def to_data_list(self):
-        print(self.organization)
+    def to_data_list(self) -> pd.DataFrame:
         return pd.DataFrame(
             {
                 "name": self.name,
@@ -27,5 +26,5 @@ class Tournament:
                 "end_date": self.end_date,
                 "link": self.link,
             },
-            index=[0]
+            index=[0],
         )

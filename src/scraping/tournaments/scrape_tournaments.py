@@ -18,8 +18,6 @@ def scrape_tournaments() -> None:
     df.to_csv("out/tournaments.csv", sep=",", index=False)
 
 
-
-
 def scrape_tournaments_on_page() -> list[Tournament]:
     data = {
         "page": 1,
