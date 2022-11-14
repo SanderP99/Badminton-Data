@@ -3,7 +3,9 @@ from datetime import date, timedelta
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-from tournament import Tournament
+
+from ..matches.scrape_matches import scrape_matches
+from .tournament import Tournament
 
 base_link = "https://bwf.tournamentsoftware.com/find/tournament/DoSearch"
 
@@ -14,7 +16,7 @@ def scrape_tournaments() -> None:
 
     tournaments = pd.concat([tournament.to_data_list() for tournament in tournaments])
     df = pd.concat([df, tournaments], ignore_index=True)
-    df.drop_duplicates()
+    df = df.drop_duplicates()
     df.to_csv("out/tournaments.csv", sep=",", index=False)
 
 
