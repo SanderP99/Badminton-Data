@@ -2,6 +2,7 @@ name: Scrape Players
 on:
   schedule:
     - cron: 0 5 * * 1
+  workflow-dispatch
 jobs:
   scrape-players:
     runs-on: ubuntu-latest
