@@ -4,7 +4,7 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
-from ..matches.scrape_matches import scrape_matches
+# from ..matches.scrape_matches import scrape_matches
 from .tournament import Tournament
 
 base_link = "https://bwf.tournamentsoftware.com/find/tournament/DoSearch"
