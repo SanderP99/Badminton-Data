@@ -39,7 +39,10 @@ def parse_tournament(tournament) -> Tournament:
     name = tournament.find("span", class_="nav-link__value").text
     link = tournament.find("a", class_="media__link")["href"]
     organization, location = tournament.find("small", class_="media__subheading").text.strip().split(" | ")
-    city, country = location.split(", ")
+    try:
+        city, country = location.split(", ")
+    except ValueError:
+        _, city, country = location.split(", ")
     dates = tournament.find("small", class_="media__subheading--muted").text.strip().split("\r\nto")
     start_date, end_date = dates[0].strip(), dates[1].strip()
     try:
