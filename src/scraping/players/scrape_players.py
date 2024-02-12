@@ -15,6 +15,7 @@ categories = {"MS": 472, "WS": 473, "MD": 474, "WD": 475, "XD": 476}
 
 base_link = "https://bwf.tournamentsoftware.com/ranking/ranking.aspx?rid=70"
 ranking_link = "https://bwf.tournamentsoftware.com/ranking/category.aspx?id=%d&category=%d&C472FOC=&p=%d&ps=%d"
+headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:76.0) Gecko/20100101 Firefox/76.0'}
 
 
 def scrape_players(number_of_players: int = 1000, output_path: str = "out") -> None:
@@ -41,7 +42,7 @@ def write_to_csv(players: Union[list[SinglePlayer], list[Pair]], category: str, 
 
 
 def scrape_players_on_page(link: str, is_doubles: bool) -> Union[list[SinglePlayer], list[Pair]]:
-    response = requests.get(link)
+    response = requests.get(link, headers=headers)
     soup = BeautifulSoup(response.content, "html.parser")
     records = soup.find_all("tr")[2:-1]  # Remove two headers and footer
     players = []
@@ -177,7 +178,6 @@ def get_ranking_link(ranking_id: int, category: str, page_number: int = 1, items
 
 
 def get_correct_ranking_id() -> int:
-    headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:76.0) Gecko/20100101 Firefox/76.0'}
     response = requests.get(base_link, headers=headers)
     return int(BeautifulSoup(response.content, "html.parser").find("option").get("value"))
 
