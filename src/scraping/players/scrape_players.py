@@ -177,7 +177,8 @@ def get_ranking_link(ranking_id: int, category: str, page_number: int = 1, items
 
 
 def get_correct_ranking_id() -> int:
-    response = requests.get(base_link)
+    headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:76.0) Gecko/20100101 Firefox/76.0'}
+    response = requests.get(base_link, headers=headers)
     return int(BeautifulSoup(response.content, "html.parser").find("option").get("value"))
 
 
