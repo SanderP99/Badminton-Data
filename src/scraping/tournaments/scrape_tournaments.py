@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 from .tournament import Tournament
 
 base_link = "https://bwf.tournamentsoftware.com/find/tournament/DoSearch"
+headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:76.0) Gecko/20100101 Firefox/76.0'}
 
 
 def scrape_tournaments() -> None:
@@ -26,7 +27,7 @@ def scrape_tournaments_on_page() -> list[Tournament]:
         "TournamentFilter.StartDate": (date.today() - timedelta(days=7)).strftime("%Y-%m-%d"),
         "TournamentFilter.EndDate": date.today().strftime("%Y-%m-%d"),
     }
-    response = requests.post(base_link, data=data)
+    response = requests.post(base_link, data=data, headers=headers)
     soup = BeautifulSoup(response.content, "html.parser")
     tournaments = soup.find_all("li", class_="list__item", recursive=False)
     tournament_list = []
